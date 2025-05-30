@@ -1,0 +1,3 @@
+.idea
+# Don't commit local overrides
+config.local.yaml

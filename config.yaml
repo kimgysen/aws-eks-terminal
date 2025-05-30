@@ -1,0 +1,7 @@
+aws:
+  start-url: https://your-aws-domain/start
+  ca-bundle: C:\\path\\to\\fullchain.crt
+  region: eu-central-1
+  profiles:
+    - profile-1
+    - profile-2
