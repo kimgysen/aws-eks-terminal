@@ -75,7 +75,7 @@ def fetch_resources(namespace, resource_type):
 def open_resource(namespace, resource):
         print(f"open {resource}s for namespace: {namespace}")
         try:
-            subprocess.run(f"kubectl get {resource} -n {namespace} -o yaml | more", check=True, shell=True)
+            subprocess.run(f'cmd /c "kubectl get {resource} -n {namespace} -o yaml & pause"', check=True, shell=True)
         except subprocess.CalledProcessError:
             print("--> :'( Fetching resources failed.")
             exit(1)
