@@ -21,15 +21,22 @@ def fetch_eks_pods(namespace):
 
 def pod_debug(namespace, pod, port):
     print(f"Starting debug session for pod: {pod}")
+
+    user_input = input(f"Enter local port to use (press Enter to use default: {port}): ")
+    local_port = user_input.strip() or port  # Use entered port or default if blank
+
     try:
-        subprocess.run(f"kubectl port-forward {pod} {port}:{port} -n {namespace}",
-            shell=True
+        subprocess.run(
+            f"kubectl port-forward {pod} {local_port}:{local_port} -n {namespace}",
+            shell=True,
+            check=True  # Ensures CalledProcessError is raised on failure
         )
     except subprocess.CalledProcessError:
         print("--> :'( Opening debug port failed.")
         exit(1)
     except KeyboardInterrupt:
         print("\n--> Port forwarding interrupted by user.")
+
     input("\nPress Enter to return to the menu...")
 
 def pod_log(namespace, pod, tail):
